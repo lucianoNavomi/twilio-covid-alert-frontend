@@ -1,60 +1,84 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
+
+    <!-- <v-app-bar
       color="primary"
+      app
+      permanent
       dark
     >
+    
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+        COVID Alerts Subscription System
       </div>
 
       <v-spacer></v-spacer>
+    </v-app-bar> -->
+      <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-app-bar
+        color="primary"
+        dark
+        app
+        permanent
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        
+        <div class="d-flex align-center">
+          COVID Alerts Subscription System
+        </div>
+
+        <!-- <v-toolbar-title>My files</v-toolbar-title> -->
+
+        <v-spacer></v-spacer>
+
+      </v-app-bar>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        absolute
+        bottom
+        temporary
+      >
+        <v-list
+          nav
+          dense
+        >
+          <v-list-item-group
+            v-model="group"
+            active-class="indigo--text text--accent-4"
+          >
+            <v-list-item to="/">
+              <v-list-item-title>Subscribe</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item to="/admin">
+              <v-list-item-title>Admin</v-list-item-title>
+            </v-list-item>
+
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
 
     <v-main>
-      <HelloWorld/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+  export default {
+    name: "App",
+    data: () => ({
+      drawer: false,
+      group: null,
+    }),
 
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+    watch: {
+      group () {
+        this.drawer = false
+      },
+    }
+  };
 </script>
